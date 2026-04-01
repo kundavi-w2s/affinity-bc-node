@@ -1,0 +1,67 @@
+{
+  "name": "affinity-bc-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run build-ts && npm run serve",
+    "build": "npm run build-ts",
+    "serve": "node dist/server.js",
+    "build-ts": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://Jagadeeshjack@bitbucket.org/W2SAdmin/affinity-bc-node.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://bitbucket.org/W2SAdmin/affinity-bc-node/issues"
+  },
+  "homepage": "https://bitbucket.org/W2SAdmin/affinity-bc-node#readme",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.926.0",
+    "@aws-sdk/lib-storage": "^3.926.0",
+    "@aws-sdk/s3-request-presigner": "^3.926.0",
+    "@google/generative-ai": "^0.24.1",
+    "@napi-rs/canvas": "latest",
+    "@types/ejs": "^3.1.5",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/nodemailer": "^7.0.3",
+    "aws-sdk": "^2.1692.0",
+    "axios": "^1.13.2",
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "crypto-js": "^4.2.0",
+    "dotenv": "^17.2.3",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "firebase-admin": "^13.5.0",
+    "joi": "^18.0.1",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^2.0.2",
+    "mysql2": "^3.15.3",
+    "nodemailer": "^7.0.10",
+    "pine": "^1.1.1",
+    "redis": "^5.9.0",
+    "reflect-metadata": "^0.2.2",
+    "sequelize": "^6.37.7",
+    "sequelize-typescript": "^2.1.6",
+    "socket.io": "^4.8.1"
+  },
+  "devDependencies": {
+    "@types/aws-sdk": "^0.0.42",
+    "@types/cors": "^2.8.19",
+    "@types/crypto-js": "^4.2.2",
+    "@types/express": "^5.0.3",
+    "@types/joi": "^17.2.2",
+    "@types/multer": "^2.0.0",
+    "@types/node": "^24.7.2",
+    "@types/socket.io": "^3.0.1",
+    "nodemon": "^3.1.10",
+    "patch-package": "^8.0.1",
+    "postinstall-postinstall": "^2.1.0",
+    "typescript": "^5.9.3"
+  }
+}

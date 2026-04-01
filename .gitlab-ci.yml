@@ -1,0 +1,51 @@
+image: docker:24
+
+services:
+  - docker:24-dind
+
+stages:
+  - build_push
+
+variables:
+  DOCKER_TLS_CERTDIR: ""
+  IMAGE_NAME: asia-south1-docker.pkg.dev/gke-kubernetes-affinity/wingmawo-backend/wingmawo-backend-api
+  GCP_BUCKET_REGION: asia-south1
+
+  # Paths inside repo (MATCH CODE)
+  FIREBASE_KEY_FILE: src/settings/Affinity-firebase.json
+  IMAGEUPLOAD_KEY_FILE: src/settings/affinity-imageupload.json
+
+build_and_push:
+  stage: build_push
+  tags:
+    - w2s_runners
+  only:
+    - develop
+
+  script:
+    # 🔐 GCP Service Account
+    - echo "$GCP_SERVICE_KEY" > gcp-key.json
+
+    # 📁 Create settings directory
+    - mkdir -p src/settings
+
+    # 🔑 Inject JSON files
+    - echo "$firebase" > "$FIREBASE_KEY_FILE"
+    - echo "$imageupload" > "$IMAGEUPLOAD_KEY_FILE"
+
+    # ✅ Verify files exist
+    - ls -la src/settings/
+
+    # 🔐 Docker login to Artifact Registry
+    - docker login -u _json_key --password-stdin https://${GCP_BUCKET_REGION}-docker.pkg.dev < gcp-key.json
+
+    # 🏷️ Build & Push image
+    - DATE_TAG=$(date +%d%m%y)-${CI_PIPELINE_IID}
+    - docker build -t ${IMAGE_NAME}:${DATE_TAG} .
+    - docker push ${IMAGE_NAME}:${DATE_TAG}
+
+  after_script:
+    # 🧹 Cleanup secrets
+    - rm -f gcp-key.json
+    - rm -f "$FIREBASE_KEY_FILE"
+    - rm -f "$IMAGEUPLOAD_KEY_FILE"
